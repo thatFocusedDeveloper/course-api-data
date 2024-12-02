@@ -17,12 +17,6 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
-    // Arrays.asList() retruns an Immutable List -> new ArrayList copies all the List elements and returns a Mutable List
-    List<Topic> topics = new ArrayList<>(Arrays.asList(
-            new Topic("Java", "Java Programming 2"),
-            new Topic("JavaScript", "JavaScript Programming"),
-            new Topic("Spring", "Spring Boot Framework")
-    ));
     public List<Topic> getAllTopics() {
         return topicRepository.findAll();
     }

@@ -28,22 +28,6 @@ public class TopicController {
 
     }
 
-//    // Using same Path Variable name
-//    @GetMapping("/{id}")
-//    public Topic getTopicByIdUsingSamePathVariable(@PathVariable Integer id) {
-//        // Path Variable generally match by name, if the name is different, we can provide the path variable name
-//        return topicService.getTopicById(id);
-//
-//    }
-//
-//    // Using Different Path Variable name
-//    @GetMapping("/{topicId}")
-//    public Topic getTopicByIdUsingDiffPathVariable(@PathVariable("topicId") Integer id) {
-//        // Path Variable generally match by name, if the name is different, we can provide the path variable name
-//        return topicService.getTopicById(id);
-//
-//    }
-
     @PostMapping
     public void addTopic(@RequestBody Topic topic) {
         topicService.addTopic(topic);

@@ -7,10 +7,10 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Topic {
     @Id
@@ -19,4 +19,8 @@ public class Topic {
     private String name;
     private String description;
 
+    public Topic(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

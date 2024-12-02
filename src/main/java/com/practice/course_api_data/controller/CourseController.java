@@ -15,7 +15,7 @@ public class CourseController {
 
     @GetMapping
     public List<Course> getAllCoursesForTopic (@RequestParam(required = false) String topic ) {
-        Topic java = new Topic(1234, "Java", "Java Programming");
-        return List.of(new Course(2345,"JavaBrains", "by Java Brains Guy",java));
+        Topic java = new Topic("Java", "Java Programming");
+        return List.of(new Course("JavaBrains", "by Java Brains Guy",java));
     }
 }

@@ -23,7 +23,7 @@ public class TopicController {
 
     // Using Request Param
     @GetMapping("/topic")
-    public Topic getTopicById(@RequestParam Integer id) {
+    public Topic getTopicById(@RequestParam int id) {
         return topicService.getTopicById(id);
 
     }
@@ -49,13 +49,19 @@ public class TopicController {
         topicService.addTopic(topic);
     }
 
+
+    @PostMapping("/addAllTopics")
+    public void addAllTopics(@RequestBody List<Topic> topicList) {
+        topicService.addAllTopics(topicList);
+    }
+
     @PutMapping
     public void updateTopic(@RequestBody Topic topic) {
         topicService.updateTopic(topic);
     }
 
     @DeleteMapping
-    public void deleteTopicById(@RequestParam Integer id) {
+    public void deleteTopicById(@RequestParam int id) {
         topicService.deleteTopic(id);
     }
 }

@@ -19,43 +19,32 @@ public class TopicService {
 
     // Arrays.asList() retruns an Immutable List -> new ArrayList copies all the List elements and returns a Mutable List
     List<Topic> topics = new ArrayList<>(Arrays.asList(
-            new Topic(1234, "Java", "Java Programming 2"),
-            new Topic(1235, "JavaScript", "JavaScript Programming"),
-            new Topic(1236, "Spring", "Spring Boot Framework")
+            new Topic("Java", "Java Programming 2"),
+            new Topic("JavaScript", "JavaScript Programming"),
+            new Topic("Spring", "Spring Boot Framework")
     ));
     public List<Topic> getAllTopics() {
-        return topics;
+        return topicRepository.findAll();
     }
 
-    public Topic getTopicById(Integer id) {
-        return  topics.stream().filter(topic -> topic.getId() == id).findFirst().orElse(new Topic());
+    public Topic getTopicById(long id) {
+        return topicRepository.findById(id).orElse(new Topic());
+//        return  topics.stream().filter(topic -> topic.getId() == id).findFirst().orElse(new Topic());
     }
 
     public void addTopic (Topic newTopic) {
-        boolean isExistingTopic = getTopicById((int) newTopic.getId()).getId() != 0;
-        if(!isExistingTopic) {
-            topics.add(newTopic);
-        }
+        topicRepository.save(newTopic);
+    }
+
+    public void addAllTopics (List<Topic> topicList) {
+        topicRepository.saveAll(topicList);
     }
 
     public void updateTopic (Topic newTopic) {
-//        boolean isExistingTopic = false;
-//        for (int i = 0; i < topics.size(); i++) {
-//            if (topics.get(i).getId() == newTopic.getId()) {
-//                isExistingTopic = true;
-//                topics.set(i,newTopic);
-//            }
-//        }
-        topics.stream()
-                .filter(topic -> topic.getId() == newTopic.getId())
-                .findFirst()
-                .ifPresent(existingTopic -> {
-                    int index = topics.indexOf(existingTopic);
-                    topics.set(index, newTopic);
-                });
+        topicRepository.saveAndFlush(newTopic);
     }
 
-    public void deleteTopic (Integer id) {
-        topics.removeIf(topic -> topic.getId() == id);
+    public void deleteTopic (long id) {
+        topicRepository.deleteById(id);
     }
 }

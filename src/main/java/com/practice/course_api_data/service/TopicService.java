@@ -1,6 +1,7 @@
 package com.practice.course_api_data.service;
 
 import com.practice.course_api_data.entity.Topic;
+import com.practice.course_api_data.repository.TopicRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,6 +10,13 @@ import java.util.List;
 
 @Service
 public class TopicService {
+
+    private TopicRepository topicRepository;
+
+    public TopicService(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
+    }
+
     // Arrays.asList() retruns an Immutable List -> new ArrayList copies all the List elements and returns a Mutable List
     List<Topic> topics = new ArrayList<>(Arrays.asList(
             new Topic(1234, "Java", "Java Programming 2"),
@@ -24,7 +32,7 @@ public class TopicService {
     }
 
     public void addTopic (Topic newTopic) {
-        boolean isExistingTopic = getTopicById(newTopic.getId()).getId() != 0;
+        boolean isExistingTopic = getTopicById((int) newTopic.getId()).getId() != 0;
         if(!isExistingTopic) {
             topics.add(newTopic);
         }
